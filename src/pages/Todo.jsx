@@ -39,10 +39,14 @@ function Todo() {
         is_completed: false,
         user_id: session.user.id,
       })
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
+  }
+
+  // Handle delete task
+  const deleteTask = async (id) => {
+    const { error } = await supabase.from("todos").delete().eq("id", id)
   }
 
   if (loading) {
@@ -71,7 +75,7 @@ function Todo() {
         </div>
         <div className="flex flex-col gap-5">
           {tasks?.map((task, index) => (
-            <ListItem key={index} task={task} />
+            <ListItem key={index} task={task} deleteTask={deleteTask} />
           ))}
         </div>
       </div>
