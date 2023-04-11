@@ -47,10 +47,10 @@ function Login() {
   }
 
   return (
-    <div className="w-100% h-screen bg-#d2daff flex justify-center items-center">
-      <div className="bg-#B1B2FF shadow-2xl p-10 w-xl rounded-2xl">
+    <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
+      <div className="bg-#f92c85 shadow-2xl p-10 w-xl rounded-lg">
         <div className="flex justify-between">
-          <h1 className="text-5xl mb-6">Login</h1>
+          <h1 className="text-5xl mb-6 text-#5ebec4">Login</h1>
           <button
             className="p-0 w-45 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
           hover:bg-#b1b2ff flex items-stretch justify-items-stretch tracking-wide text-lg"
@@ -76,7 +76,7 @@ function Login() {
                   id="email"
                   placeholder="example@gmail.com"
                   onChange={onMutate}
-                  className="w-100% h-40px rounded-lg outline-0 b-1 pl-9 bg-#d2daff"
+                  className="w-100% h-40px rounded-lg outline-0 b-1 pl-9 bg-#fdf5df"
                 />
               </div>
 

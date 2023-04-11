@@ -45,6 +45,8 @@ function Todo() {
         console.log(error)
       }
     }
+
+    setTaskText("")
   }
 
   // Handle delete task
