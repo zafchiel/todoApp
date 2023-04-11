@@ -16,8 +16,13 @@ export const useAuthStatus = () => {
       const { subscription } = supabase.auth.onAuthStateChange(
         async (event, session) => {
           if (session) {
+            localStorage.setItem(
+              "sb-tydssuelttxsxgtapjym-auth-token",
+              JSON.stringify(session)
+            )
             setUser(true)
           } else {
+            localStorage.removeItem("sb-tydssuelttxsxgtapjym-auth-token")
             setUser(false)
           }
           setLoading(false)

@@ -1,12 +1,11 @@
-import { useParams } from "react-router-dom"
 import supabase from "../services/supabase"
 import { useEffect, useState } from "react"
 import ListItem from "../components/ListItem"
+import Spinner from "../components/Spinner"
 
 function Todo() {
   const [tasks, setTasks] = useState([])
-
-  const { userId } = useParams()
+  const [loading, setLoading] = useState(true)
 
   // Logout user
   const handleLogout = async () => {
@@ -15,12 +14,21 @@ function Todo() {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const { data, error } = await supabase.from("todos").select()
-      setTasks(data)
+      try {
+        const { data } = await supabase.from("todos").select()
+        setTasks(data)
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     fetchTasks()
   }, [])
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <div className="w-100% h-screen bg-#d2daff flex justify-center items-center">
