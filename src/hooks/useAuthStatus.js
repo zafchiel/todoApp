@@ -1,13 +1,16 @@
+import { json } from "react-router-dom"
 import supabase from "../services/supabase"
 import { useEffect, useState } from "react"
 
 export const useAuthStatus = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [session, setSession] = useState({})
 
   useEffect(() => {
     let gotSession = localStorage.getItem("sb-tydssuelttxsxgtapjym-auth-token")
     if (gotSession) {
+      setSession(JSON.parse(gotSession))
       setUser(true)
       setLoading(false)
     }
@@ -20,6 +23,7 @@ export const useAuthStatus = () => {
               "sb-tydssuelttxsxgtapjym-auth-token",
               JSON.stringify(session)
             )
+            setSession(session)
             setUser(true)
           } else {
             localStorage.removeItem("sb-tydssuelttxsxgtapjym-auth-token")
@@ -35,5 +39,5 @@ export const useAuthStatus = () => {
     getSession()
   }, [])
 
-  return { user, loading }
+  return { user, loading, session }
 }

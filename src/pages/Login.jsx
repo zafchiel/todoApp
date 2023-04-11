@@ -35,6 +35,17 @@ function Login() {
     }
   }
 
+  // Handle Google OAuth
+  const handleGoogle = async () => {
+    try {
+      const { data } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="w-100% h-screen bg-#d2daff flex justify-center items-center">
       <div className="bg-#B1B2FF shadow-2xl p-10 w-xl rounded-2xl">
@@ -97,7 +108,10 @@ function Login() {
               </div>
 
               <div className="w-100%">
-                <button className="w-100% flex bg-#d2daff itmes-center cursor-pointer justify-center gap-2 p-3 rounded-xl outline-none">
+                <button
+                  onClick={handleGoogle}
+                  className="w-100% flex bg-#d2daff itmes-center cursor-pointer justify-center gap-2 p-3 rounded-xl outline-none"
+                >
                   <div className="i-mdi:google-plus text-xl"></div>
                   <p>Sign in with Google</p>
                 </button>
