@@ -9,11 +9,7 @@ function PrivateRoute() {
     return <Spinner />
   }
 
-  return user ? (
-    <Navigate to={`/todos/${session.user.id}`} />
-  ) : (
-    <Navigate to="/" />
-  )
+  return user ? <Navigate to={`/todos/${session.user.id}`} /> : <Outlet />
 }
 
 export default PrivateRoute
