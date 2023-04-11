@@ -33,20 +33,31 @@ function Todo() {
   // Handle adding task
   const addTask = async (e) => {
     e.preventDefault()
-    try {
-      const { data } = await supabase.from("todos").insert({
-        task: taskText,
-        is_completed: false,
-        user_id: session.user.id,
-      })
-    } catch (error) {
-      console.log(error)
+
+    if (taskText.length > 0) {
+      try {
+        const { data } = await supabase.from("todos").insert({
+          task: taskText,
+          is_completed: false,
+          user_id: session.user.id,
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
   // Handle delete task
   const deleteTask = async (id) => {
     const { error } = await supabase.from("todos").delete().eq("id", id)
+  }
+
+  // Handle update task
+  const updateTask = async (id) => {
+    const { error } = await supabase
+      .from("todos")
+      .update({ task: taskText })
+      .eq("id", id)
   }
 
   if (loading) {
@@ -75,7 +86,12 @@ function Todo() {
         </div>
         <div className="flex flex-col gap-5">
           {tasks?.map((task, index) => (
-            <ListItem key={index} task={task} deleteTask={deleteTask} />
+            <ListItem
+              key={index}
+              task={task}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+            />
           ))}
         </div>
       </div>
