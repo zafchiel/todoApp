@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import supabase from "../services/supabase"
+import { Button } from "@mui/material"
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ function Login() {
           >
             <Link
               to="/"
-              className="no-underline text-#d2daff w-100% h-100% flex items-center justify-center  font-semibold uppercase"
+              className="no-underline text-#d2daff w-100% h-100% flex items-center justify-center  font-semibold uppercase hover:text-#f92c85"
             >
               Return
             </Link>
@@ -96,25 +97,27 @@ function Login() {
               </div>
 
               <div className="flex items-center gap-5">
-                <button
+                <Button
+                  variant="contained"
                   type="submit"
                   className="p-2 bg-#5ebec4 rounded-lg outline-0 b-0 cursor-pointer uppercase tracking-wider font-bold text-#fdf5df b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
                 >
                   Continue
-                </button>
+                </Button>
                 <p>
                   Yet not registered? <Link to="/register">Sign-up</Link>
                 </p>
               </div>
 
               <div className="w-100%">
-                <button
+                <Button
+                  variant="contained"
                   onClick={handleGoogle}
-                  className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 p-3 rounded-lg outline-none b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
+                  className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 p-3 hover:scale-102"
                 >
                   <div className="i-mdi:google-plus text-xl"></div>
                   <p>Sign in with Google</p>
-                </button>
+                </Button>
               </div>
             </div>
           </form>

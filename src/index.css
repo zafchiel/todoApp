@@ -10,6 +10,12 @@
   font-family: "Satoshi", sans-serif;
 }
 
+.lower-card {
+  -webkit-box-shadow: 0px 10px 41px -5px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0px 10px 41px -5px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 10px 41px -5px rgba(0, 0, 0, 0.45);
+}
+
 .loader-div {
   background-color: #d2daff;
   position: absolute;

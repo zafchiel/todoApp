@@ -45,7 +45,7 @@ function TaskDetails({ selectedTask }) {
     return (
       <div className="bg-#f92c85 w-100% h-100% flex flex-col gap-10 justify-center items-center">
         <h1>{selectedTask.task}</h1>
-        <form>
+        <form className="flex flex-col gap-5">
           <TextField
             id="outlined-multiline-static"
             label="Description"

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import supabase from "../services/supabase"
+import { Button } from "@mui/material"
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -50,14 +51,14 @@ function Register() {
       <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
         <div className="bg-#f92c85 shadow-2xl shadow-rose p-10 w-xl rounded-lg">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-5xl text-#5ebec4 font-bold">Register</h1>
+            <h1 className="text-5xl text-#5ebec4 font-bold ">Register</h1>
             <div
               className="p-0 w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
           hover:bg-#b1b2ff flex items-stretch justify-items-stretch tracking-wide text-lg"
             >
               <Link
                 to="/"
-                className="no-underline text-#d2daff w-100% h-100% flex items-center justify-center  font-semibold uppercase"
+                className="no-underline text-#d2daff w-100% h-100% flex items-center justify-center hover:text-#f92c85 font-semibold uppercase"
               >
                 Return
               </Link>
@@ -96,25 +97,27 @@ function Register() {
                 </div>
 
                 <div className="flex items-center gap-5">
-                  <button
+                  <Button
+                    variant="contained"
                     type="submit"
-                    className="p-2 bg-#5ebec4 rounded-lg outline-0 b-0 cursor-pointer uppercase tracking-wider font-bold text-#fdf5df b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
+                    className="tracking-wider hover:scale-102"
                   >
                     Continue
-                  </button>
+                  </Button>
                   <p>
                     Already registered? <Link to="/register">Sign-in</Link>
                   </p>
                 </div>
 
                 <div className="w-100%">
-                  <button
+                  <Button
+                    variant="contained"
                     onClick={handleGoogle}
-                    className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 p-3 rounded-lg outline-none b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
+                    className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 hover:scale-102"
                   >
                     <div className="i-mdi:google-plus text-xl"></div>
                     <p>Sign up with Google</p>
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>

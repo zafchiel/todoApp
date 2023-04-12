@@ -42,7 +42,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="h-screen w-100% flex justify-center items-center sticky bg-#EEF1FF top-0">
+      <div className="lower-card h-screen w-100% flex justify-center items-center sticky bg-#EEF1FF top-0">
         <h1>TEXT</h1>
       </div>
     </div>
