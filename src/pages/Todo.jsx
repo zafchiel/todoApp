@@ -11,6 +11,7 @@ function Todo() {
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedTask, setSelectedtask] = useState(null)
+  const [changeSaved, setChangeSaved] = useState(false)
 
   const { session } = useAuthStatus()
 
@@ -31,7 +32,7 @@ function Todo() {
     }
 
     fetchTasks()
-  }, [])
+  }, [changeSaved])
 
   // Handle adding task
   const addTask = async (e) => {
@@ -118,7 +119,10 @@ function Todo() {
         {selectedTask && (
           <div className="h-screen w-60% flex">
             <div className="clip"></div>
-            <TaskDetails selectedTask={selectedTask} />
+            <TaskDetails
+              selectedTask={selectedTask}
+              setChangeSaved={(state) => setChangeSaved(state)}
+            />
           </div>
         )}
       </div>

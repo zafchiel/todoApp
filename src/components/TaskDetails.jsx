@@ -1,15 +1,17 @@
 import TextField from "@mui/material/TextField"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import supabase from "../services/supabase"
 import { toast } from "react-hot-toast"
 import Button from "@mui/material/Button"
 import { Checkbox, FormControlLabel } from "@mui/material"
 
-function TaskDetails({ selectedTask }) {
+function TaskDetails({ selectedTask, setChangeSaved }) {
   const [desc, setDesc] = useState("")
   const [isChecked, setIsChecked] = useState(null)
+  const titleRef = useRef()
 
   useEffect(() => {
+    setChangeSaved(false)
     if (selectedTask.description) {
       setDesc(selectedTask.description)
     } else {
@@ -32,9 +34,11 @@ function TaskDetails({ selectedTask }) {
       .update({
         description: desc,
         is_completed: isChecked,
+        task: titleRef.current.innerText,
       })
       .eq("id", selectedTask.id)
     toast.success("Saved")
+    setChangeSaved(true)
     if (error) {
       console.log(error)
       toast.error("Could not save")
@@ -44,7 +48,9 @@ function TaskDetails({ selectedTask }) {
   if (selectedTask) {
     return (
       <div className="bg-#f92c85 w-100% h-100% flex flex-col gap-10 justify-center items-center">
-        <h1>{selectedTask.task}</h1>
+        <h1 ref={titleRef} contentEditable="true" className="p-2 rounded-2xl">
+          {selectedTask.task}
+        </h1>
         <form className="flex flex-col gap-5">
           <TextField
             id="outlined-multiline-static"
