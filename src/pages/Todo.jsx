@@ -4,6 +4,7 @@ import ListItem from "../components/ListItem"
 import Spinner from "../components/Spinner"
 import { useAuthStatus } from "../hooks/useAuthStatus"
 import TaskDetails from "../components/TaskDetails"
+import { Button } from "@mui/material"
 
 function Todo() {
   const [taskText, setTaskText] = useState("")
@@ -85,13 +86,11 @@ function Todo() {
 
   return (
     <>
-      <button
-        onClick={handleLogout}
-        className="absolute left-5 top-5 p-0 w-45 rounded-xl cursor-pointer b-3 b-solid b-#d2daff
-        bg-#f92c85 tracking-wide text-lg"
-      >
-        LogOut
-      </button>
+      <div className="absolute left-5 top-5">
+        <Button variant="outlined" onClick={handleLogout}>
+          Log Out
+        </Button>
+      </div>
       <div className="w-100% h-screen bg-#fdf5df flex justify-between items-center">
         <div className="flex flex-col gap-10 p-10">
           <div>

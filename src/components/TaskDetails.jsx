@@ -1,16 +1,25 @@
 import TextField from "@mui/material/TextField"
 import { useEffect, useState } from "react"
 import supabase from "../services/supabase"
+import { toast } from "react-hot-toast"
+import Button from "@mui/material/Button"
+import { Checkbox, FormControlLabel } from "@mui/material"
 
 function TaskDetails({ selectedTask }) {
   const [desc, setDesc] = useState("")
-  const [isChecked, setIsChecked] = useState(selectedTask.is_completed)
+  const [isChecked, setIsChecked] = useState(null)
 
   useEffect(() => {
     if (selectedTask.description) {
       setDesc(selectedTask.description)
     } else {
       setDesc("")
+    }
+
+    if (selectedTask.is_completed) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
     }
   }, [selectedTask])
 
@@ -25,8 +34,10 @@ function TaskDetails({ selectedTask }) {
         is_completed: isChecked,
       })
       .eq("id", selectedTask.id)
+    toast.success("Saved")
     if (error) {
       console.log(error)
+      toast.error("Could not save")
     }
   }
 
@@ -34,7 +45,7 @@ function TaskDetails({ selectedTask }) {
     return (
       <div className="bg-#f92c85 w-100% h-100% flex flex-col gap-10 justify-center items-center">
         <h1>{selectedTask.task}</h1>
-        <form onSubmit={onSubmit}>
+        <form>
           <TextField
             id="outlined-multiline-static"
             label="Description"
@@ -44,17 +55,22 @@ function TaskDetails({ selectedTask }) {
             onChange={(e) => setDesc(e.target.value)}
             placeholder="Enter your description"
           />
-          <div className="flex justify-between">
-            <input
-              type="checkbox"
-              id="isCompleted"
-              name="isCompleted"
-              onChange={() => setIsChecked(!isChecked)}
+          <div>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isChecked}
+                  onChange={() => setIsChecked(!isChecked)}
+                  name="isCompleted"
+                />
+              }
+              label="Completed"
             />
-            <label htmlFor="isCompleted">Completed</label>
           </div>
 
-          <button type="submit">Save Changes</button>
+          <Button variant="contained" onClick={onSubmit} className="#d2daff">
+            Save Changes
+          </Button>
         </form>
       </div>
     )
