@@ -1,9 +1,8 @@
-import TextField from "@mui/material/TextField"
 import { useEffect, useRef, useState } from "react"
 import supabase from "../services/supabase"
 import { toast } from "react-hot-toast"
 import Button from "@mui/material/Button"
-import { Checkbox, FormControlLabel } from "@mui/material"
+import { Checkbox, FormControlLabel, TextField } from "@mui/material"
 
 function TaskDetails({ selectedTask, setChangeSaved }) {
   const [desc, setDesc] = useState("")
@@ -52,6 +51,7 @@ function TaskDetails({ selectedTask, setChangeSaved }) {
           {selectedTask.task}
         </h1>
         <form className="flex flex-col gap-5">
+          <TextField id="outlined-basic" label="Task" variant="outlined" />
           <TextField
             id="outlined-multiline-static"
             label="Description"
