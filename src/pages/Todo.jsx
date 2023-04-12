@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import ListItem from "../components/ListItem"
 import Spinner from "../components/Spinner"
 import { useAuthStatus } from "../hooks/useAuthStatus"
+import TaskDetails from "../components/TaskDetails"
 
 function Todo() {
   const [taskText, setTaskText] = useState("")
@@ -29,7 +30,7 @@ function Todo() {
     }
 
     fetchTasks()
-  }, [tasks])
+  }, [])
 
   // Handle adding task
   const addTask = async (e) => {
@@ -37,11 +38,15 @@ function Todo() {
 
     if (taskText.length > 0) {
       try {
-        const { data } = await supabase.from("todos").insert({
-          task: taskText,
-          is_completed: false,
-          user_id: session.user.id,
-        })
+        const { data } = await supabase
+          .from("todos")
+          .insert({
+            task: taskText,
+            is_completed: false,
+            user_id: session.user.id,
+          })
+          .select()
+        setSelectedtask(data[0])
       } catch (error) {
         console.log(error)
       }
@@ -53,6 +58,9 @@ function Todo() {
   // Handle delete task
   const deleteTask = async (id) => {
     const { error } = await supabase.from("todos").delete().eq("id", id)
+    if (error) {
+      console.log(error)
+    }
   }
 
   // Handle update task
@@ -61,11 +69,14 @@ function Todo() {
       .from("todos")
       .update({ task: taskText })
       .eq("id", id)
+    if (error) {
+      console.log(error)
+    }
   }
 
   // Handle select task
   const selectTask = (id) => {
-    setSelectedtask(tasks.filter((task) => task.id === id))
+    setSelectedtask(tasks.filter((task) => task.id === id)[0])
   }
 
   if (loading) {
@@ -73,38 +84,46 @@ function Todo() {
   }
 
   return (
-    <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
+    <>
       <button
         onClick={handleLogout}
-        className="absolute right-5 top-5 p-0 w-45 rounded-xl cursor-pointer b-3 b-solid b-#d2daff
-        bg-#b1b2ff tracking-wide text-lg"
+        className="absolute left-5 top-5 p-0 w-45 rounded-xl cursor-pointer b-3 b-solid b-#d2daff
+        bg-#f92c85 tracking-wide text-lg"
       >
         LogOut
       </button>
-      <div className="flex flex-col gap-10">
-        <div>
-          <form onSubmit={addTask}>
-            <input
-              type="text"
-              value={taskText}
-              onChange={(e) => setTaskText(e.target.value)}
-            />
-            <button type="submit">Add</button>
-          </form>
+      <div className="w-100% h-screen bg-#fdf5df flex justify-between items-center">
+        <div className="flex flex-col gap-10 p-10">
+          <div>
+            <form onSubmit={addTask}>
+              <input
+                type="text"
+                value={taskText}
+                onChange={(e) => setTaskText(e.target.value)}
+              />
+              <button type="submit">Add</button>
+            </form>
+          </div>
+          <div className="flex flex-col gap-5">
+            {tasks?.map((task, index) => (
+              <ListItem
+                key={index}
+                task={task}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+                selectTask={selectTask}
+              />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-5">
-          {tasks?.map((task, index) => (
-            <ListItem
-              key={index}
-              task={task}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-              selectTask={selectTask}
-            />
-          ))}
-        </div>
+        {selectedTask && (
+          <div className="h-screen w-60% flex">
+            <div className="clip"></div>
+            <TaskDetails selectedTask={selectedTask} />
+          </div>
+        )}
       </div>
-    </div>
+    </>
   )
 }
 
