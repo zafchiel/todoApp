@@ -8,6 +8,7 @@ function Todo() {
   const [taskText, setTaskText] = useState("")
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedTask, setSelectedtask] = useState(null)
 
   const { session } = useAuthStatus()
 
@@ -62,12 +63,17 @@ function Todo() {
       .eq("id", id)
   }
 
+  // Handle select task
+  const selectTask = (id) => {
+    setSelectedtask(tasks.filter((task) => task.id === id))
+  }
+
   if (loading) {
     return <Spinner />
   }
 
   return (
-    <div className="w-100% h-screen bg-#d2daff flex justify-center items-center">
+    <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
       <button
         onClick={handleLogout}
         className="absolute right-5 top-5 p-0 w-45 rounded-xl cursor-pointer b-3 b-solid b-#d2daff
@@ -93,6 +99,7 @@ function Todo() {
               task={task}
               deleteTask={deleteTask}
               updateTask={updateTask}
+              selectTask={selectTask}
             />
           ))}
         </div>

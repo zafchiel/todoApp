@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import supabase from "../services/supabase"
-import Spinner from "../components/Spinner"
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -25,11 +24,11 @@ function Register() {
     e.preventDefault()
 
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data } = await supabase.auth.signUp({
         email,
         password,
       })
-      navigate("/tasks")
+      navigate(`/todos/${data.user.id}`)
     } catch (error) {
       console.log(error)
     }
@@ -48,12 +47,12 @@ function Register() {
 
   return (
     <>
-      <div className="w-100% h-screen bg-#d2daff flex justify-center items-center">
-        <div className="bg-#B1B2FF shadow-2xl p-10 w-xl rounded-2xl">
-          <div className="flex justify-between">
-            <h1 className="text-5xl mb-6">Register</h1>
-            <button
-              className="p-0 w-45 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
+      <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
+        <div className="bg-#f92c85 shadow-2xl shadow-rose p-10 w-xl rounded-lg">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-5xl text-#5ebec4 font-bold">Register</h1>
+            <div
+              className="p-0 w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
           hover:bg-#b1b2ff flex items-stretch justify-items-stretch tracking-wide text-lg"
             >
               <Link
@@ -62,7 +61,7 @@ function Register() {
               >
                 Return
               </Link>
-            </button>
+            </div>
           </div>
           <div>
             <form onSubmit={handleSubmit}>
@@ -77,7 +76,7 @@ function Register() {
                     id="email"
                     placeholder="example@gmail.com"
                     onChange={onMutate}
-                    className="w-100% h-40px rounded-lg outline-0 b-1 pl-9 bg-#d2daff"
+                    className="w-100% h-40px rounded-lg outline-0 b-1 pl-9 bg-#fdf5df"
                   />
                 </div>
 
@@ -92,26 +91,26 @@ function Register() {
                     min={6}
                     placeholder="password"
                     onChange={onMutate}
-                    className="w-100% h-40px rounded-lg outline-none b-1 pl-9 bg-#d2daff"
+                    className="w-100% h-40px rounded-lg outline-none b-1 pl-9 bg-#fdf5df"
                   />
                 </div>
 
                 <div className="flex items-center gap-5">
                   <button
                     type="submit"
-                    className="p-2 bg-#d2daff rounded-xl outline-0 b-0 cursor-pointer"
+                    className="p-2 bg-#5ebec4 rounded-lg outline-0 b-0 cursor-pointer uppercase tracking-wider font-bold text-#fdf5df b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
                   >
                     Continue
                   </button>
                   <p>
-                    Already registered? <Link to="/log-in">Sign-in</Link>
+                    Already registered? <Link to="/register">Sign-in</Link>
                   </p>
                 </div>
 
                 <div className="w-100%">
                   <button
                     onClick={handleGoogle}
-                    className="w-100% flex bg-#d2daff itmes-center cursor-pointer justify-center gap-2 p-3 rounded-xl outline-none"
+                    className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 p-3 rounded-lg outline-none b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
                   >
                     <div className="i-mdi:google-plus text-xl"></div>
                     <p>Sign up with Google</p>
