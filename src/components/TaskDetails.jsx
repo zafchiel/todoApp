@@ -44,6 +44,7 @@ function TaskDetails({ selectedTask, setChangeSaved }) {
     return (
       <div className="bg-#f92c85 w-100% h-100% flex flex-col gap-10 justify-center items-center">
         <form className="flex flex-col gap-5">
+          <TextField id="outlined-basic" label="Task" variant="outlined" />
           <TextField
             id="outlined-basic"
             label="Task"
