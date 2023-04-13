@@ -5,12 +5,15 @@ import Spinner from "../components/Spinner"
 import { useAuthStatus } from "../hooks/useAuthStatus"
 import TaskDetails from "../components/TaskDetails"
 import { Button } from "@mui/material"
+import { toast } from "react-hot-toast"
 
 function Todo() {
   const [taskText, setTaskText] = useState("")
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedTask, setSelectedtask] = useState(null)
+
+  // State to refresh list
   const [changeSaved, setChangeSaved] = useState(false)
 
   const { session } = useAuthStatus()
@@ -19,20 +22,6 @@ function Todo() {
   const handleLogout = async () => {
     await supabase.auth.signOut()
   }
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const { data } = await supabase.from("todos").select()
-        setTasks(data)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchTasks()
-  }, [changeSaved])
 
   // Handle adding task
   const addTask = async (e) => {
@@ -49,6 +38,7 @@ function Todo() {
           })
           .select()
         setSelectedtask(data[0])
+        setChangeSaved(true)
       } catch (error) {
         console.log(error)
       }
@@ -62,17 +52,12 @@ function Todo() {
     const { error } = await supabase.from("todos").delete().eq("id", id)
     if (error) {
       console.log(error)
-    }
-  }
-
-  // Handle update task
-  const updateTask = async (id) => {
-    const { error } = await supabase
-      .from("todos")
-      .update({ task: taskText })
-      .eq("id", id)
-    if (error) {
-      console.log(error)
+    } else {
+      toast.success("Task deleted")
+      setChangeSaved(true)
+      if (selectedTask.id === id) {
+        setSelectedtask(null)
+      }
     }
   }
 
@@ -80,6 +65,21 @@ function Todo() {
   const selectTask = (id) => {
     setSelectedtask(tasks.filter((task) => task.id === id)[0])
   }
+
+  useEffect(() => {
+    setChangeSaved(false)
+    const fetchTasks = async () => {
+      try {
+        const { data } = await supabase.from("todos").select()
+        setTasks(data)
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchTasks()
+  }, [changeSaved])
 
   if (loading) {
     return <Spinner />
@@ -110,15 +110,13 @@ function Todo() {
                 key={index}
                 task={task}
                 deleteTask={deleteTask}
-                updateTask={updateTask}
                 selectTask={selectTask}
               />
             ))}
           </div>
         </div>
         {selectedTask && (
-          <div className="h-screen w-60% flex">
-            <div className="clip"></div>
+          <div className="clip">
             <TaskDetails
               selectedTask={selectedTask}
               setChangeSaved={(state) => setChangeSaved(state)}

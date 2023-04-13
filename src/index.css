@@ -52,6 +52,6 @@
 .clip {
   clip-path: polygon(22% 0, 100% 0, 100% 100%, 0% 100%);
   background-color: #f92c85;
-  height: 100%;
-  width: 20%;
+  height: 100vh;
+  width: 60%;
 }

@@ -61,7 +61,7 @@ function TaskDetails({ selectedTask, setChangeSaved }) {
             label="Description"
             multiline
             rows={4}
-            value={editedTask.description}
+            value={editedTask.description ? editedTask.description : ""}
             onChange={(e) =>
               setEditedTask((prevState) => ({
                 ...prevState,
