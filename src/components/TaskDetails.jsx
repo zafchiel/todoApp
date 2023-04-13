@@ -1,29 +1,23 @@
-import TextField from "@mui/material/TextField"
 import { useEffect, useRef, useState } from "react"
 import supabase from "../services/supabase"
 import { toast } from "react-hot-toast"
 import Button from "@mui/material/Button"
-import { Checkbox, FormControlLabel } from "@mui/material"
+import { Checkbox, FormControlLabel, TextField } from "@mui/material"
 
 function TaskDetails({ selectedTask, setChangeSaved }) {
-  const [desc, setDesc] = useState("")
-  const [isChecked, setIsChecked] = useState(null)
-  const titleRef = useRef()
+  const [editedTask, setEditedTask] = useState(selectedTask)
 
   useEffect(() => {
-    setChangeSaved(false)
-    if (selectedTask.description) {
-      setDesc(selectedTask.description)
-    } else {
-      setDesc("")
-    }
-
-    if (selectedTask.is_completed) {
-      setIsChecked(true)
-    } else {
-      setIsChecked(false)
-    }
+    setEditedTask(selectedTask)
   }, [selectedTask])
+
+  // Handle check complete
+  const onCheckChange = () => {
+    setEditedTask((state) => ({
+      ...state,
+      is_completed: !state.is_completed,
+    }))
+  }
 
   // Handle saving changes
   const onSubmit = async (e) => {
@@ -32,41 +26,56 @@ function TaskDetails({ selectedTask, setChangeSaved }) {
     const { error } = await supabase
       .from("todos")
       .update({
-        description: desc,
-        is_completed: isChecked,
-        task: titleRef.current.innerText,
+        task: editedTask.task,
+        description: editedTask.description,
+        is_completed: editedTask.is_completed,
       })
       .eq("id", selectedTask.id)
-    toast.success("Saved")
-    setChangeSaved(true)
     if (error) {
       console.log(error)
       toast.error("Could not save")
+    } else {
+      toast.success("Saved")
+      setChangeSaved(true)
     }
   }
 
   if (selectedTask) {
     return (
       <div className="bg-#f92c85 w-100% h-100% flex flex-col gap-10 justify-center items-center">
-        <h1 ref={titleRef} contentEditable="true" className="p-2 rounded-2xl">
-          {selectedTask.task}
-        </h1>
         <form className="flex flex-col gap-5">
+          <TextField
+            id="outlined-basic"
+            label="Task"
+            variant="outlined"
+            value={editedTask.task}
+            onChange={(e) =>
+              setEditedTask((prevState) => ({
+                ...prevState,
+                task: e.target.value,
+              }))
+            }
+          />
           <TextField
             id="outlined-multiline-static"
             label="Description"
             multiline
             rows={4}
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            value={editedTask.description}
+            onChange={(e) =>
+              setEditedTask((prevState) => ({
+                ...prevState,
+                description: e.target.value,
+              }))
+            }
             placeholder="Enter your description"
           />
           <div>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={isChecked}
-                  onChange={() => setIsChecked(!isChecked)}
+                  checked={editedTask.is_completed}
+                  onChange={onCheckChange}
                   name="isCompleted"
                 />
               }
