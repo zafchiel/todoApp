@@ -16,14 +16,17 @@ function ListItem({ task, deleteTask, selectTask }) {
   const [modalOpened, setModalOpened] = useState(false)
 
   return (
-    <div className="flex gap-5 w-50 justify-between items-center">
-      <div onClick={() => selectTask(task.id)} className="h-15 b-1">
-        {task.task}
-      </div>
+    <>
       <div
-        className="i-mdi:trash-can-outline text-3xl cursor-pointer"
-        onClick={() => setModalOpened(true)}
-      ></div>
+        onClick={() => selectTask(task.id)}
+        className="cursor-pointer p-5 glass-bg flex gap-5 w-50 justify-between items-center"
+      >
+        <div className="font-bold">{task.task}</div>
+        <div
+          className="i-mdi:trash-can-outline text-3xl cursor-pointer"
+          onClick={() => setModalOpened(true)}
+        ></div>
+      </div>
       <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
         <Box sx={style}>
           <div className="flex flex-col gap-3">
@@ -47,7 +50,7 @@ function ListItem({ task, deleteTask, selectTask }) {
           </div>
         </Box>
       </Modal>
-    </div>
+    </>
   )
 }
 

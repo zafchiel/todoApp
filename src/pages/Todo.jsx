@@ -4,7 +4,7 @@ import ListItem from "../components/ListItem"
 import Spinner from "../components/Spinner"
 import { useAuthStatus } from "../hooks/useAuthStatus"
 import TaskDetails from "../components/TaskDetails"
-import { Button } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import { toast } from "react-hot-toast"
 
 function Todo() {
@@ -87,24 +87,28 @@ function Todo() {
 
   return (
     <>
-      <div className="absolute left-5 top-5">
-        <Button variant="outlined" onClick={handleLogout}>
-          Log Out
-        </Button>
-      </div>
-      <div className="w-100% h-screen bg-#fdf5df flex justify-between items-center">
-        <div className="flex flex-col gap-10 p-10">
+      <div className="w-100% h-screen max-h-screen bg-#fdf5df flex justify-between">
+        <div className="flex flex-col gap-10 p-10 h-screen">
+          <Button variant="outlined" onClick={handleLogout}>
+            Log Out
+          </Button>
           <div>
             <form onSubmit={addTask}>
-              <input
-                type="text"
-                value={taskText}
-                onChange={(e) => setTaskText(e.target.value)}
-              />
-              <button type="submit">Add</button>
+              <div className="flex gap-2">
+                <TextField
+                  id="outlined-basic"
+                  label="Outlined"
+                  variant="outlined"
+                  value={taskText}
+                  onChange={(e) => setTaskText(e.target.value)}
+                />
+                <Button variant="contained" type="submit">
+                  Add
+                </Button>
+              </div>
             </form>
           </div>
-          <div className="flex flex-col gap-5">
+          <div className="grid grid-cols-2 gap-4">
             {tasks?.map((task, index) => (
               <ListItem
                 key={index}

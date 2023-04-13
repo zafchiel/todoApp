@@ -55,3 +55,12 @@
   height: 100vh;
   width: 60%;
 }
+
+.glass-bg {
+  background: rgba(253, 245, 223, 0.38);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.7px);
+  -webkit-backdrop-filter: blur(9.7px);
+  border: 1px solid rgba(253, 245, 223, 0.5);
+}
