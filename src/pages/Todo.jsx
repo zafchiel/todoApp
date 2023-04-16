@@ -124,6 +124,7 @@ function Todo() {
             <TaskDetails
               selectedTask={selectedTask}
               setChangeSaved={(state) => setChangeSaved(state)}
+              setSelectedtask={(state) => setSelectedtask(state)}
             />
           </div>
         )}

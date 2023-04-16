@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast"
 import Button from "@mui/material/Button"
 import { Checkbox, FormControlLabel, TextField } from "@mui/material"
 
-function TaskDetails({ selectedTask, setChangeSaved }) {
+function TaskDetails({ selectedTask, setChangeSaved, setSelectedtask }) {
   const [editedTask, setEditedTask] = useState(selectedTask)
 
   useEffect(() => {
@@ -85,6 +85,13 @@ function TaskDetails({ selectedTask, setChangeSaved }) {
 
           <Button variant="contained" onClick={onSubmit} className="#d2daff">
             Save Changes
+          </Button>
+          <Button
+            variant="outlined"
+            className="m-5"
+            onClick={() => setSelectedtask(null)}
+          >
+            Close
           </Button>
         </form>
       </div>
