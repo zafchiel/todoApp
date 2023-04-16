@@ -108,7 +108,7 @@ function Todo() {
               </div>
             </form>
           </div>
-          <div className="grid grid-cols-2 gap-4 overflow-y-scroll">
+          <div className="flex flex-col w-100% gap-4 overflow-y-scroll">
             {tasks?.map((task, index) => (
               <ListItem
                 key={index}
