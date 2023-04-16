@@ -97,7 +97,7 @@ function Todo() {
               <div className="flex gap-2">
                 <TextField
                   id="outlined-basic"
-                  label="Outlined"
+                  label="Enter your task"
                   variant="outlined"
                   value={taskText}
                   onChange={(e) => setTaskText(e.target.value)}
