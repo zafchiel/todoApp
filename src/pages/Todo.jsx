@@ -87,8 +87,8 @@ function Todo() {
 
   return (
     <>
-      <div className="w-100% h-screen max-h-screen bg-#fdf5df flex justify-between">
-        <div className="flex flex-col gap-10 p-10 h-screen w-50%">
+      <div className="w-100% h-screen overflow-hidden bg-#fdf5df flex justify-between">
+        <div className="flex flex-col gap-10 p-10 h-screen w-40%">
           <Button variant="outlined" onClick={handleLogout}>
             Log Out
           </Button>

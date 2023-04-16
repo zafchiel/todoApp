@@ -18,7 +18,8 @@ function Home() {
           <div className="flex gap-5 ">
             <button
               className="p-3 w-45 rounded-lg  bg-#5ebec4 cursor-pointer tracking-wide font-semibold outline-0 b-0 text-lg 
-            hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
+            hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102
+            transition"
             >
               <Link
                 to="/register"
