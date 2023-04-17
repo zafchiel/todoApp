@@ -60,7 +60,7 @@
 
   animation: slide-in 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-@media (min-width: 640px) {
+@media (min-width: 700px) {
   .clip {
     clip-path: polygon(22% 0, 100% 0, 100% 100%, 0% 100%);
     width: 60%;
