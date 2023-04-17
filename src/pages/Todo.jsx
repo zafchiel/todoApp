@@ -30,7 +30,7 @@ function Todo() {
   const addTask = async (e) => {
     e.preventDefault()
 
-    if (taskText.length > 0 && taskText.length < 16) {
+    if (isValid) {
       try {
         const { data } = await supabase
           .from("todos")

@@ -17,13 +17,15 @@ function ListItem({ task, deleteTask, selectTask }) {
 
   return (
     <>
-      <div
-        onClick={() => selectTask(task.id)}
-        className="cursor-pointer p-5 bg-#FDF0DF hover:bg-#fdf0f8 hover:scale-102 transition shadow-lg rounded-lg w-90% flex gap-5 justify-between items-center"
-      >
-        <div className="font-bold">{task.task}</div>
+      <div className="cursor-pointer bg-#FDF0DF hover:bg-#fdf0f8 hover:scale-102 transition shadow-lg rounded-lg w-90% flex gap-2 justify-between items-center">
         <div
-          className="i-mdi:trash-can-outline text-3xl cursor-pointer"
+          className="font-bold w-80% p-3 h-100% break-words"
+          onClick={() => selectTask(task.id)}
+        >
+          {task.task}
+        </div>
+        <div
+          className="i-mdi:trash-can-outline text-3xl w-12 cursor-pointer"
           onClick={() => setModalOpened(true)}
         ></div>
       </div>
