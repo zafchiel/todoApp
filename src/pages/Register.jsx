@@ -49,11 +49,13 @@ function Register() {
   return (
     <>
       <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
-        <div className="bg-#f92c85 shadow-2xl shadow-rose p-10 w-xl rounded-lg">
+        <div className="bg-#f92c85 shadow-2xl shadow-rose p-10 w-90% md:w-xl rounded-lg">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-5xl text-#5ebec4 font-bold ">Register</h1>
+            <h1 className="text-2xl md:text-5xl text-#5ebec4 font-bold ">
+              Register
+            </h1>
             <div
-              className="p-0 w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
+              className="p-0 w-30 md:w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
           hover:bg-#b1b2ff flex items-stretch justify-items-stretch tracking-wide text-lg"
             >
               <Link
