@@ -54,7 +54,6 @@
   top: 0;
   left: 0;
   height: 100vh;
-
   position: absolute;
   z-index: 5;
   background-color: #f92c85;
@@ -65,6 +64,7 @@
   .clip {
     clip-path: polygon(22% 0, 100% 0, 100% 100%, 0% 100%);
     width: 60%;
+    position: unset;
   }
 }
 
