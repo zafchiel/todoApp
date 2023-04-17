@@ -4,6 +4,7 @@ import HomeRoute from "./components/HomeRoute"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Todo from "./pages/Todo"
+import NotFound from "./pages/NotFound"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Toaster } from "react-hot-toast"
 import { createTheme, ThemeProvider } from "@mui/material"
@@ -41,6 +42,7 @@ function App() {
             <Route path="/todos/:userId" element={<PrivateRoute />}>
               <Route path="/todos/:userId" element={<Todo />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
