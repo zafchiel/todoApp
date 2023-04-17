@@ -30,7 +30,7 @@ function Todo() {
   const addTask = async (e) => {
     e.preventDefault()
 
-    if (taskText.length > 0) {
+    if (taskText.length > 0 && taskText.length < 16) {
       try {
         const { data } = await supabase
           .from("todos")
@@ -45,9 +45,8 @@ function Todo() {
       } catch (error) {
         console.log(error)
       }
+      setTaskText("")
     }
-
-    setTaskText("")
   }
 
   // Handle delete task
@@ -84,12 +83,14 @@ function Todo() {
     fetchTasks()
   }, [changeSaved])
 
-  // Validate input task
-  const validation = () => {
-    if (taskText.length <= 0 || taskText.length > 5) {
+  // Handle input task
+  const handleChange = (e) => {
+    setTaskText(e.target.value)
+    if (e.target.value.length <= 0 || e.target.value.length > 15) {
       setIsValid(false)
+    } else {
+      setIsValid(true)
     }
-    setIsValid(true)
   }
 
   if (loading) {
@@ -108,15 +109,13 @@ function Todo() {
               <div className="flex gap-2 w-100%">
                 <TextField
                   error={!isValid}
+                  helperText={!isValid && "Must be Between 1 and 15 letters"}
                   fullWidth
                   id="outlined-basic"
                   label="Enter your task"
                   variant="outlined"
                   value={taskText}
-                  onChange={(e) => {
-                    setTaskText(e.target.value)
-                    validation()
-                  }}
+                  onChange={handleChange}
                 />
                 <Button variant="contained" type="submit">
                   Add
