@@ -17,7 +17,7 @@ function ListItem({ task, deleteTask, selectTask }) {
 
   return (
     <>
-      <div className="cursor-pointer bg-#FDF0DF hover:bg-#fdf0f8 hover:scale-102 transition shadow-lg rounded-md w-90% flex gap-2 justify-between items-center">
+      <div className="cursor-pointer bg-#FDF0DF hover:bg-#fdf0f8 hover:scale-102 transition shadow-lg rounded-md w-90% flex gap-2 justify-between items-center mb-5">
         <div
           className="font-bold w-80% p-3 h-100% break-words capitalize"
           onClick={() => selectTask(task.id)}

@@ -6,6 +6,8 @@ import { useAuthStatus } from "../hooks/useAuthStatus"
 import TaskDetails from "../components/TaskDetails"
 import { Button, TextField } from "@mui/material"
 import { toast } from "react-hot-toast"
+import SimpleBar from "simplebar-react"
+import "simplebar-react/dist/simplebar.min.css"
 
 function Todo() {
   const [taskText, setTaskText] = useState("")
@@ -123,7 +125,7 @@ function Todo() {
               </div>
             </form>
           </div>
-          <div className="flex flex-col w-100% gap-4 overflow-y-scroll">
+          <SimpleBar style={{ maxHeight: 500 }}>
             {tasks?.map((task, index) => (
               <ListItem
                 key={index}
@@ -132,7 +134,7 @@ function Todo() {
                 selectTask={selectTask}
               />
             ))}
-          </div>
+          </SimpleBar>
         </div>
         {selectedTask && (
           <div className="clip">
