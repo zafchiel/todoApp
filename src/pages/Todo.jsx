@@ -110,6 +110,21 @@ function Todo() {
     }
   }
 
+  // Handle double clicking task
+  const handleQuickComplete = async (task) => {
+    const { error } = await supabase
+      .from("todos")
+      .update({
+        is_completed: !task.is_completed,
+      })
+      .eq("id", task.id)
+    if (error) {
+      console.log(error)
+    } else {
+      setChangeSaved(true)
+    }
+  }
+
   // Fetch tasks
   useEffect(() => {
     setChangeSaved(false)
@@ -172,6 +187,7 @@ function Todo() {
           <SimpleBar style={{ maxHeight: "calc(100% - 200px)" }}>
             {tasks?.map((task, index) => (
               <ListItem
+                handleQuickComplete={handleQuickComplete}
                 key={index}
                 task={task}
                 deleteTask={deleteTask}

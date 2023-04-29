@@ -12,7 +12,7 @@ const style = {
   p: 3,
 }
 
-function ListItem({ task, deleteTask, selectTask }) {
+function ListItem({ task, deleteTask, selectTask, handleQuickComplete }) {
   const [modalOpened, setModalOpened] = useState(false)
 
   return (
@@ -21,11 +21,18 @@ function ListItem({ task, deleteTask, selectTask }) {
         <div
           className="flex items-center font-bold w-80% p-3 h-100% break-words capitalize"
           onClick={() => selectTask(task.id)}
+          onDoubleClick={() => handleQuickComplete(task)}
         >
           {task.is_completed ? (
-            <div className="i-mdi:checkbox-marked-circle-outline text-3xl w-12"></div>
+            <div
+              className="i-mdi:checkbox-marked-circle-outline text-3xl w-12"
+              onClick={() => handleQuickComplete(task)}
+            ></div>
           ) : (
-            <div className="i-mdi:checkbox-blank-circle-outline text-3xl w-12"></div>
+            <div
+              className="i-mdi:checkbox-blank-circle-outline text-3xl w-12"
+              onClick={() => handleQuickComplete(task)}
+            ></div>
           )}
           {task.task}
         </div>
