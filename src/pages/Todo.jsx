@@ -100,21 +100,6 @@ function Todo() {
     setSelectedtask(tasks.filter((task) => task.id === id)[0])
   }
 
-  useEffect(() => {
-    setChangeSaved(false)
-    const fetchTasks = async () => {
-      try {
-        const { data } = await supabase.from("todos").select()
-        setTasks(data)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchTasks()
-  }, [changeSaved])
-
   // Handle input task
   const handleChange = (e) => {
     setTaskText(e.target.value)
@@ -124,6 +109,25 @@ function Todo() {
       setIsValid(true)
     }
   }
+
+  // Fetch tasks
+  useEffect(() => {
+    setChangeSaved(false)
+    const fetchTasks = async () => {
+      try {
+        const { data } = await supabase
+          .from("todos")
+          .select()
+          .order("created_at")
+        setTasks(data)
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchTasks()
+  }, [changeSaved])
 
   if (loading) {
     return <Spinner />
