@@ -6,14 +6,27 @@ import { useAuthStatus } from "../hooks/useAuthStatus"
 import TaskDetails from "../components/TaskDetails"
 import { Button, TextField } from "@mui/material"
 import { toast } from "react-hot-toast"
+import { Modal, Box } from "@mui/material"
 import SimpleBar from "simplebar-react"
 import "simplebar-react/dist/simplebar.min.css"
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  minWidth: 300,
+  bgcolor: "#fdf5df",
+  boxShadow: 24,
+  p: 3,
+}
 
 function Todo() {
   const [taskText, setTaskText] = useState("")
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedTask, setSelectedtask] = useState(null)
+  const [modalOpened, setModalOpened] = useState(false)
 
   // State to refresh list
   const [changeSaved, setChangeSaved] = useState(false)
@@ -48,6 +61,23 @@ function Todo() {
         console.log(error)
       }
       setTaskText("")
+    }
+  }
+
+  // Make array of completed tasks
+  const completedTasks = tasks
+    .filter((task) => task.is_completed === true)
+    .map((task) => task.id)
+
+  // Handle delete all completed tasks
+  const deleteCompletedTasks = async (idArr) => {
+    const { error } = await supabase.from("todos").delete().in("id", idArr)
+    if (error) {
+      console.log(error)
+    } else {
+      toast.success("Tasks deleted")
+      setChangeSaved(true)
+      setSelectedtask(null)
     }
   }
 
@@ -103,9 +133,19 @@ function Todo() {
     <>
       <div className="w-100% h-screen overflow-hidden bg-#fdf5df flex justify-between">
         <div className="flex flex-col gap-10 p-2 md:p-10 h-screen w-100% md:w-40%">
-          <Button variant="outlined" onClick={handleLogout}>
-            Log Out
-          </Button>
+          <div className="flex justify-between gap-2 w-100%">
+            <Button variant="outlined" onClick={handleLogout}>
+              Log Out
+            </Button>
+
+            <Button
+              variant="contained"
+              type="error"
+              onClick={() => setModalOpened(true)}
+            >
+              Del Completed
+            </Button>
+          </div>
           <div>
             <form onSubmit={addTask}>
               <div className="flex gap-2 w-100%">
@@ -146,6 +186,29 @@ function Todo() {
           </div>
         )}
       </div>
+
+      <Modal open={modalOpened} onClose={() => setModalOpened(false)}>
+        <Box sx={style}>
+          <div className="flex flex-col gap-3">
+            <h3>Are you sure?</h3>
+            <div className="flex justify-between">
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => {
+                  deleteCompletedTasks(completedTasks)
+                  setModalOpened(false)
+                }}
+              >
+                Delete
+              </Button>
+              <Button variant="outlined" onClick={() => setModalOpened(false)}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </Box>
+      </Modal>
     </>
   )
 }
