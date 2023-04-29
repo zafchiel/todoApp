@@ -102,7 +102,7 @@ function Todo() {
   return (
     <>
       <div className="w-100% h-screen overflow-hidden bg-#fdf5df flex justify-between">
-        <div className="flex flex-col gap-10 p-10 h-screen w-100% md:w-40%">
+        <div className="flex flex-col gap-10 p-2 md:p-10 h-screen w-100% md:w-40%">
           <Button variant="outlined" onClick={handleLogout}>
             Log Out
           </Button>
@@ -125,7 +125,7 @@ function Todo() {
               </div>
             </form>
           </div>
-          <SimpleBar style={{ maxHeight: 500 }}>
+          <SimpleBar style={{ maxHeight: "calc(100% - 200px)" }}>
             {tasks?.map((task, index) => (
               <ListItem
                 key={index}

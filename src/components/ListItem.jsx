@@ -1,5 +1,5 @@
 import { Modal, Box, Button } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const style = {
   position: "absolute",
@@ -19,9 +19,14 @@ function ListItem({ task, deleteTask, selectTask }) {
     <>
       <div className="cursor-pointer bg-#FDF0DF hover:bg-#fdf0f8 hover:scale-102 transition shadow-lg rounded-md w-90% flex gap-2 justify-between items-center mb-5 ml-2">
         <div
-          className="font-bold w-80% p-3 h-100% break-words capitalize"
+          className="flex items-center font-bold w-80% p-3 h-100% break-words capitalize"
           onClick={() => selectTask(task.id)}
         >
+          {task.is_completed ? (
+            <div className="i-mdi:checkbox-marked-circle-outline text-3xl w-12"></div>
+          ) : (
+            <div className="i-mdi:checkbox-blank-circle-outline text-3xl w-12"></div>
+          )}
           {task.task}
         </div>
         <div
