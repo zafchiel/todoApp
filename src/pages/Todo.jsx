@@ -122,6 +122,7 @@ function Todo() {
       console.log(error)
     } else {
       setChangeSaved(true)
+      setSelectedtask(null)
     }
   }
 
