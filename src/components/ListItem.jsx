@@ -23,17 +23,15 @@ function ListItem({ task, deleteTask, selectTask, handleQuickComplete }) {
           onClick={() => selectTask(task.id)}
           onDoubleClick={() => handleQuickComplete(task)}
         >
-          {task.is_completed ? (
-            <div
-              className="i-mdi:checkbox-marked-circle-outline text-3xl w-12"
-              onClick={() => handleQuickComplete(task)}
-            ></div>
-          ) : (
-            <div
-              className="i-mdi:checkbox-blank-circle-outline text-3xl w-12"
-              onClick={() => handleQuickComplete(task)}
-            ></div>
-          )}
+          <div
+            className={`${
+              task.is_completed
+                ? "i-mdi:checkbox-marked-circle-outline"
+                : "i-mdi:checkbox-blank-circle-outline"
+            }
+              text-3xl w-12`}
+            onClick={() => handleQuickComplete(task)}
+          ></div>
           {task.task}
         </div>
         <div
