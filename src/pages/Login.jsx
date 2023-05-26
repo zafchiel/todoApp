@@ -2,12 +2,15 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import supabase from "../services/supabase"
 import { Button } from "@mui/material"
+import { Snackbar } from "@mui/material"
+import { toast } from "react-hot-toast"
 
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
+
   const { email, password } = formData
 
   const navigate = useNavigate()
@@ -24,27 +27,29 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    try {
-      const { data } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-
-      navigate(`/todos/${data.user.id}`)
-    } catch (error) {
-      console.log(error)
+    if (email.length === 0 || password.length === 0) {
+      toast.error("All fields must be filled!")
+      return
     }
+
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    if (user) navigate(`/todos/${user.id}`)
+
+    if (error) toast.error(error.message)
   }
 
   // Handle Google OAuth
   const handleGoogle = async () => {
-    try {
-      const { data } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-      })
-    } catch (error) {
-      console.log(error)
-    }
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    })
+    if (error) toast.error(error.message)
   }
 
   return (
@@ -89,7 +94,7 @@ function Login() {
                   type="password"
                   name="password"
                   id="password"
-                  min={6}
+                  minLength={6}
                   placeholder="password"
                   onChange={onMutate}
                   className="w-100% h-40px rounded-lg outline-none b-1 pl-9 bg-#fdf5df"
