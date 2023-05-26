@@ -1,20 +1,21 @@
-import { useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { useAuthStatus } from "../hooks/useAuthStatus"
+import { Link } from "react-router-dom"
+import { Balancer } from "react-wrap-balancer"
 
 function Home() {
   return (
     <div>
       <div className="h-screen w-100% flex justify-center items-center sticky bg-#fdf5df top-0">
         <div className="text-center w-90% md:w-2xl flex flex-col m-2 gap-5 items-center">
-          <h1 className="text-size-4xl md:text-size-6xl tracking-wide font-bold text-#5ebec4">
-            Simple ToDo List
-          </h1>
-          <p className="text-size-md md:text-size-xl">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Repudiandae deleniti, expedita voluptate aperiam aspernatur nam
-            dolorem minima.
-          </p>
+          <Balancer>
+            <h1 className="text-size-4xl md:text-size-6xl tracking-wide font-bold text-#5ebec4">
+              Simple ToDo List
+            </h1>
+            <p className="text-size-md md:text-size-xl">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Repudiandae deleniti, expedita voluptate aperiam aspernatur nam
+              dolorem minima.
+            </p>
+          </Balancer>
           <div className="flex gap-5 justify-center w-90% md:w-2xl">
             <button
               className="p-3 w-30 md:w-45 rounded-lg  bg-#5ebec4 cursor-pointer tracking-wide font-semibold outline-0 b-0 md:text-lg 
