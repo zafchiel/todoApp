@@ -18,13 +18,13 @@ function Home() {
           </Balancer>
           <div className="flex gap-5 justify-center w-90% md:w-2xl">
             <button
-              className="p-3 w-30 md:w-45 rounded-lg  bg-#5ebec4 cursor-pointer tracking-wide font-semibold outline-0 b-0 md:text-lg 
+              className="p-0 h-12 w-30 md:w-45 rounded-lg  bg-#5ebec4 cursor-pointer tracking-wide font-semibold outline-0 b-0 md:text-lg 
             hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102
             transition"
             >
               <Link
                 to="/register"
-                className="no-underline text-#fdf5df  uppercase"
+                className="no-underline text-#fdf5df w-100% h-100% uppercase flex items-center justify-center"
               >
                 Get Started
               </Link>
