@@ -53,13 +53,13 @@ function Login() {
   }
 
   return (
-    <div className="w-100% h-screen bg-#fdf5df flex justify-center items-center">
-      <div className="bg-#f92c85 shadow-2xl shadow-rose p-10 w-90% md:w-xl rounded-lg">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl md:text-5xl text-#5ebec4 font-bold">Login</h1>
+    <div className="w-100% h-screen w-full bg-#fdf5df sm:flex justify-center items-center">
+      <div className="bg-#f92c85 shadow-2xl shadow-rose flex justify-center items-center flex-col p-3 sm:p-10 w-100% h-screen sm:h-auto sm:w-xl sm:rounded-lg">
+        <div className="flex justify-between items-center mb-6 w-full">
+          <h1 className="text-2xl sm:text-5xl text-#5ebec4 font-bold">Login</h1>
           <div
-            className="p-0 w-30 md:w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
-          hover:bg-#b1b2ff flex items-stretch justify-items-stretch tracking-wide text-lg"
+            className="p-0 w-30 sm:w-45 h-10 rounded-xl bg-transparent cursor-pointer b-3 b-solid b-#d2daff
+          hover:bg-#b1b2ff flex justify-between items-stretch justify-items-stretch tracking-wide text-lg"
           >
             <Link
               to="/"
@@ -69,9 +69,9 @@ function Login() {
             </Link>
           </div>
         </div>
-        <div>
+        <div className="w-full">
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 w-full">
               <div className="flex flex-col w-100% gap-5px relative">
                 <label htmlFor="email">Email</label>
 
@@ -101,15 +101,15 @@ function Login() {
                 />
               </div>
 
-              <div className="flex items-center gap-5">
+              <div className="flex flex-col sm:flex-row items-center gap-5">
                 <Button
                   variant="contained"
                   type="submit"
-                  className="p-2 bg-#5ebec4 rounded-lg outline-0 b-0 cursor-pointer uppercase tracking-wider font-bold text-#fdf5df b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
+                  className="p-2 w-full bg-#5ebec4 rounded-lg outline-0 b-0 cursor-pointer uppercase tracking-wider font-bold text-#fdf5df b-0 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] hover:scale-102"
                 >
                   Continue
                 </Button>
-                <p>
+                <p className="sm:w-25rem">
                   Yet not registered? <Link to="/register">Sign-up</Link>
                 </p>
               </div>
@@ -121,7 +121,7 @@ function Login() {
                   className="w-100% flex bg-#5ebec4 itmes-center cursor-pointer justify-center gap-2 p-3 hover:scale-102"
                 >
                   <div className="i-mdi:google-plus text-xl"></div>
-                  <p>Sign in with Google</p>
+                  <p>Continue with Google</p>
                 </Button>
               </div>
             </div>

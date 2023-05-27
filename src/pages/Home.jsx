@@ -45,7 +45,7 @@ function Home() {
         </div>
       </div>
       <div className="bg-#EEF1FF lower-card h-screen w-100% flex justify-center items-center sticky  top-0">
-        <h1 className="text-4xl animated-text font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+        <h1 className="text-4xl animated-text bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
           @ZAFCHIEL
         </h1>
       </div>
