@@ -89,3 +89,20 @@
 ::-webkit-scrollbar {
   visibility: hidden;
 }
+
+/* ----------TEXT ANIMATON--------------- */
+@keyframes text-animation {
+  0%,
+  100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+.animated-text {
+  animation: text-animation 5s ease infinite;
+}

@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.50",
+    "@julr/unocss-preset-heropatterns": "^1.0.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@unocss/preset-icons": "^0.51.4",
